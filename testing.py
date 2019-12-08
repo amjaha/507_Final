@@ -4,16 +4,8 @@ import os
 import sqlite3
 
 
-'''
-get_start_sites()
-get_univserity_sites
-get_next_university_links
-
-'''
-
 class Test(unittest.TestCase):
-    
-    
+      
     def test_process_command(self):
         #bad command
         results = process_command('adhoasj=ajsd')
@@ -37,18 +29,14 @@ class Test(unittest.TestCase):
         self.assertEqual(length, 15)
 
    
-    def test_process_university_search(self):
-       
-        
+    def test_process_university_search(self):       
         #state and tuition and major
         results = process_university_search('search state=NY tuition=50000 major=computer_science')
-        university = results[0][0]
-        
+        university = results[0][0]        
         majors = results[0][1]
         engine = create_engine('sqlite:///universities.db', echo=False)
         Session = sessionmaker(bind=engine)
         session = Session()
-
         count = session.query(University.name).join(Major).filter(Major.major.like('%computer science%')).filter(University.name == university.name).all()
         self.assertEqual(university.location[0].state,'NY')
         self.assertTrue(university.tuition <= 50000)
@@ -67,7 +55,6 @@ class Test(unittest.TestCase):
         university = results[1]
         self.assertTrue(university.location[0].state == 'NY')
     
-   
     def test_universities_data(self):
         harvard_link = 'https://www.princetonreview.com/college/harvard-college-1022984'
         state_link = 'https://www.princetonreview.com/college/michigan-state-university-1022671'
@@ -108,8 +95,7 @@ class Test(unittest.TestCase):
         self.assertEqual(acceptance_rate, 78.0)
         self.assertEqual(average_gpa, '3.73')
         self.assertEqual(university_name, 'Michigan State University')
-   
-    @unittest.skip
+  
     def test_create_universities(self):
         #call function
         engine = create_engine('sqlite:///universities.db', echo=False)
@@ -120,14 +106,8 @@ class Test(unittest.TestCase):
         session.query(Major).delete()
         session.commit()
         Base.metadata.create_all(engine)
-        
         create_database()
-        
-     
-
-        #test major table
-        
-       
+        #test tables   
         count = session.query(func.count(Major.major)).all()[0][0]
         print(count)
         self.assertTrue(count > 0)
@@ -136,17 +116,14 @@ class Test(unittest.TestCase):
         count = session.query(func.count(Location.name)).all()[0][0]
         self.assertTrue(count> 0)
 
-    @unittest.skip
     def test_scraping(self):
         #call for one page
         pages = get_start_sites(1)
-        
         #check for link from first page in pages
         self.assertTrue("https://www.princetonreview.com/college/harvard-college-1022984#!visiting" in pages)
         pages = get_start_sites(3)
         #check for link from second and third page in pages
         self.assertTrue('https://www.princetonreview.com/college/university-michigan--ann-arbor-1023092#!visiting' in pages)
         self.assertTrue('https://www.princetonreview.com/college/university-maryland--college-park-1022953#!visiting' in pages)
-
     
 unittest.main()
