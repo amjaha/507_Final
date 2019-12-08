@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Your Results</title>
+    </head>
+    <body>
+        <h1>Your Search Results</h1>
+	<table>
+        	{% for result in results %}
+		<tr>
+			{% if is_university %}
+			<td>{{result.name}} </td>
+			{% endif %}
+			{% if acceptance %}
+			<td>Acceptance: %{{result.acceptance}} </td>
+                    	{% endif %}
+                	{% if gpa %}
+                        <td>GPA: {{result.gpa}} </td>
+                    	{% endif %}
+        	{% endfor %}
+		</tr>
+	</table>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+    <title>Your Results</title>
+    <link rel=stylesheet type=text/css href="{{'style.css'}}">
+    <body>
+        <h1>Results for "{{command[7:]}}"</h1>
+	<table>
+        <tr>
+            <th>University</th>
+            <th>Major Count</th>
+            {%if tuition%}
+            <th>Tuition</th>
+            {%endif%}
+            {% if acceptance %}
+            <th>Acceptance Rate</th>
+            {% endif%}
+            {% if gpa %}
+            <th>AVG HS GPA</th>
+            {%endif%}
+        </tr>
+        	{% for school, count in results %}
+        <tr>
+            <td>{{school.name}} </td>
+            <td>{{count}}</td>
+            {%if tuition%}
+            <td>${{school.tuition}}0</td>
+            {%endif%}
+            {% if acceptance %}
+            <td>{{school.acceptance}}% </td>
+            {% endif %}
+            {% if gpa %}
+            {% if school.gpa == 0.0 %}
+            <td>N/A </td>
+            {% else %}
+            <td>{{school.gpa}} </td>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </tr>
+	</table>
+    </body>
