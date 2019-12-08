@@ -527,7 +527,7 @@ if __name__ == "__main__":
         Base.metadata.create_all(engine)
         create_database()
     command = ''
-    help = '\nOptions:\n\nEnter \'search\' followed by any combination of these parameters: \'state=\' followed by a state abbreviation, \'major=\' followed by a major with underscores where spaces would be, \'tuition=\' plus a number without commas, decimal points, or other symbols, or \'limit=\' plus a number to limit results by. Add \'gpa\' or \'acceptance\' to this search to have those statistics displayed in results.\n\nOnce you have results, enter \'map\' to map results, \'graph\' to see a bar graph of tuition, or \'distribution\' to see a distribution of tuition.\n\nEnter \'help\' to these options again.\n\nEnter \'quit\' to exit.  '
+    help = '\nOptions:\n\nEnter \'search\' followed by any combination of these parameters: \'state=\' followed by a state abbreviation, \'major=\' followed by a major with underscores where spaces would be, \'tuition=\' plus a number without commas, decimal points, or other symbols, or \'limit=\' plus a number to limit results by. Add \'gpa\' or \'acceptance\' to this search to have those statistics displayed in results.\n\nOnce you have results, enter \'map\' to map results, \'graph\' to see a bar graph of tuition, or \'distribution\' to see a distribution of tuition.\n\nEnter \'help\' to see these options again.\n\nEnter \'quit\' to exit.  '
     results = []
     print('\nEnter a command to get started or enter \'help\' for options and instructions.')
     while command != 'quit':
